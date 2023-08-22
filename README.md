@@ -1,16 +1,17 @@
-# crud_sqlite_chgpt
+# 2023 Goals Diary
 
-A new Flutter project.
+## 🚀 Description
 
-## Getting Started
+This is a CRUD application built with Flutter. With this app, you can easily set and track your goals you wish to achieve in 2023, as well as manage your tasks to help you achieve each goal. The application incorporates drag and drop functionality and follows the SOLID design pattern.
 
-This project is a starting point for a Flutter application.
+## 💻 Database Diagram:
+This is the ER Diagram of the project database
 
-A few resources to get you started if this is your first Flutter project:
+![ERDiagram](https://i.imgur.com/QtLv5k5.png)
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+## 🎓 Tecnologies: 
+This is the stack used on this project:
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+- Flutter
+- Provider
+- SQFlite

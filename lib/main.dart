@@ -1,6 +1,6 @@
-import 'package:crud_sqlite_chgpt/view_model/models_providers/diary_provider.dart';
-import 'package:crud_sqlite_chgpt/view_model/models_providers/page_provider.dart';
-import 'package:crud_sqlite_chgpt/views/diaries_list.dart';
+import 'package:crud_sqlite_chgpt/view_model/models_providers/goal_provider.dart';
+import 'package:crud_sqlite_chgpt/view_model/models_providers/task_provider.dart';
+import 'package:crud_sqlite_chgpt/views/screens/goals/goals_screen.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -22,10 +22,10 @@ class MyApp extends StatelessWidget {
     return MultiProvider(
       providers: [
         ChangeNotifierProvider(
-          create: (context) => DiaryProvider(),
+          create: (context) => GoalProvider(),
         ),
         ChangeNotifierProvider(
-          create: (context) => PagesProvider(),
+          create: (context) => TasksProvider(),
         )
       ],
       child: MaterialApp(
@@ -33,7 +33,8 @@ class MyApp extends StatelessWidget {
         theme: ThemeData(
           primarySwatch: Colors.blue,
         ),
-        home: const DiariesListScreen(),
+        home: const DiariesScreen(),
+        //home: const DiariesListScreen(),
       ),
     );
   }

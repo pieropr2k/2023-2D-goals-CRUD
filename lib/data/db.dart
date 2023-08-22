@@ -1,6 +1,15 @@
 import 'package:crud_sqlite_chgpt/data/tables.dart';
+import 'package:crud_sqlite_chgpt/model/task.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
+
+abstract class DatabaseClassMethods {
+  Future<dynamic> getById(int id);
+  //Future<List<dynamic>> getAll();
+  Future<int> insert(page);
+  Future<int> update(page);
+  Future<int> delete(int id);
+}
 
 class DatabaseClass {
   DatabaseClass();
@@ -16,7 +25,7 @@ class DatabaseClass {
   Future<Database> get database async {
     if (_database != null) return _database!;
 
-    _database = await _initDB('crud_diaries1.db');
+    _database = await _initDB('crud_diaries.db');
     return _database!;
   }
 

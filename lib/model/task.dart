@@ -1,11 +1,11 @@
-class PageClass {
+class TaskClass {
   int id;
   int? orderIndex;
   String title;
   String content;
   int diaryId;
 
-  PageClass(
+  TaskClass(
       {required this.id,
       this.orderIndex,
       required this.title,

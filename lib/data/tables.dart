@@ -1,17 +1,17 @@
-const String diaryTable = "diary";
-const String pageTable = "page";
+const String goalTable = "goal";
+const String taskTable = "task";
 
 List get tables => [
       _createTable(
-        diaryTable,
+        goalTable,
         "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
         //"order_number INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
-        "title TEXT",
-        //"(1393, 'Be Flutter developer')"
-        //    "(1123, 'Get lean')"
+        "title TEXT, "
+        "createdAt INTEGER NOT NULL",
+        //"createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP"
       ),
       _createTable(
-          pageTable,
+          taskTable,
           "id INTEGER PRIMARY KEY NOT NULL, "
           //"orderNumber INTEGER AUTOINCREMENT NOT NULL, "
           "orderIndex INTEGER, "
@@ -19,9 +19,7 @@ List get tables => [
           "title TEXT, "
           "content TEXT, "
           "diaryId INTEGER, "
-          "FOREIGN KEY(diaryId) REFERENCES $diaryTable (id)"
-          //, null
-          )
+          "FOREIGN KEY(diaryId) REFERENCES $goalTable (id)")
     ];
 
 _createTable(String table, String columns) {
@@ -33,9 +31,10 @@ _insertTable(String table, String columns, String values) {
 }
 
 String get insertScript => _insertTable(
-    diaryTable,
-    "id,"
-        "title",
-    "(1393, 'Be Flutter developer'),"
-        "(1123, 'Get lean'),"
-        "(1523, 'Publish my first release')");
+    goalTable,
+    "id, "
+        "title, "
+        "createdAt",
+    "(1393, 'Be Flutter developer', 1672531200000),"
+        "(1123, 'Get lean', 1672617600000),"
+        "(1523, 'Publish my first release', 1672704000000)");

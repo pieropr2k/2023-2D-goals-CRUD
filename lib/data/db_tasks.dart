@@ -1,18 +1,17 @@
 import 'package:crud_sqlite_chgpt/data/db.dart';
 import 'package:crud_sqlite_chgpt/data/tables.dart';
-import 'package:crud_sqlite_chgpt/model/diary.dart';
-import 'package:crud_sqlite_chgpt/model/page.dart';
+import 'package:crud_sqlite_chgpt/model/task.dart';
 import 'package:sqflite/sqflite.dart';
 
-class PagesDBClass extends DatabaseClass {
-  String tableName = pageTable;
+class TasksDBClass extends DatabaseClass implements DatabaseClassMethods {
+  String tableName = taskTable;
 
-  static final PagesDBClass instance = PagesDBClass._init();
+  static final TasksDBClass instance = TasksDBClass._init();
 
-  PagesDBClass._init();
+  TasksDBClass._init();
 
-  // tiene que haber filtro
-  Future<List<PageClass>> getPages(int diaryId) async {
+  // must have a filter diary id
+  Future<List<TaskClass>> getAll(int diaryId) async {
     final db = await instance.database;
     final dbPath = await getDatabasesPath();
     //print(dbPath);
@@ -24,7 +23,7 @@ class PagesDBClass extends DatabaseClass {
     );
     return List.generate(
       maps.length,
-      (index) => PageClass(
+      (index) => TaskClass(
         id: maps[index]['id'],
         orderIndex: maps[index]['orderIndex'],
         title: maps[index]['title'],
@@ -34,7 +33,8 @@ class PagesDBClass extends DatabaseClass {
     );
   }
 
-  Future<PageClass?> getPage(int id) async {
+  @override
+  Future<TaskClass?> getById(int id) async {
     final db = await instance.database;
     final List<Map<String, dynamic>> maps = await db.query(
       tableName,
@@ -42,7 +42,7 @@ class PagesDBClass extends DatabaseClass {
       whereArgs: [id],
     );
     if (maps.isNotEmpty) {
-      return PageClass(
+      return TaskClass(
         id: maps[0]['id'],
         title: maps[0]['title'],
         content: maps[0]['content'],
@@ -52,7 +52,8 @@ class PagesDBClass extends DatabaseClass {
     return null;
   }
 
-  Future<int> insertPage(PageClass page) async {
+  @override
+  Future<int> insert(dynamic page) async {
     final db = await instance.database;
     //print(page.toMap());
 
@@ -63,33 +64,31 @@ class PagesDBClass extends DatabaseClass {
     );
   }
 
-  //Future<int> updatePage(PageClass page, String attr, value) async {
-  Future<int> updatePage(PageClass page) async {
+  @override
+  Future<int> update(dynamic page) async {
+    //Future<int> updatePage(PageClass page) async {
     final db = await instance.database;
-    print("Intern update");
-    print(page.toMap());
-    print(page.id);
-    //print(value);
+    //print("Intern update");
+    //print(page.toMap());
+    //print(page.id);
 
     return await db.update(
       tableName,
       page.toMap(),
-      //{attr: value},
-      //{"orderIndex": value},
       where: 'id = ?',
       //conflictAlgorithm: ConflictAlgorithm.rollback,
       whereArgs: [page.id],
     );
   }
 
-  Future<int> deletePage(int id, {String dependentArg = 'id'}) async {
-    //Future<int> deletePage(int id) async {
+  @override
+  Future<int> delete(int id) async {
     final db = await DatabaseClass.instance.database;
     print(id);
     return await db.delete(
       tableName,
-      where: '$dependentArg = ?',
-      //where: 'id = ?',
+      //where: '$dependentArg = ?',
+      where: 'id = ?',
       whereArgs: [id],
     );
   }
