@@ -5,7 +5,6 @@ List get tables => [
       _createTable(
         goalTable,
         "id INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "
-        //"order_number INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL,"
         "title TEXT, "
         "createdAt INTEGER NOT NULL",
         //"createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP"
@@ -15,7 +14,6 @@ List get tables => [
           "id INTEGER PRIMARY KEY NOT NULL, "
           //"orderNumber INTEGER AUTOINCREMENT NOT NULL, "
           "orderIndex INTEGER, "
-          //"date TEXT,"
           "title TEXT, "
           "content TEXT, "
           "diaryId INTEGER, "

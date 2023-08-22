@@ -38,17 +38,4 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
-  /*
-  return ChangeNotifierProvider(
-      create: (context) => TaskProvider(),
-      child: MaterialApp(
-        title: 'Your App',
-        theme: ThemeData(
-          primarySwatch: Colors.blue,
-        ),
-        home: TaskListScreen(),
-      ),
-    );
-  }
-  */
 }

@@ -1,5 +1,4 @@
 import 'package:crud_sqlite_chgpt/data/tables.dart';
-import 'package:crud_sqlite_chgpt/model/task.dart';
 import 'package:sqflite/sqflite.dart';
 import 'package:path/path.dart';
 
@@ -17,7 +16,6 @@ class DatabaseClass {
   static final DatabaseClass instance = DatabaseClass._init();
 
   static Database? _database;
-  //String name = "tasks";
   int version = 1;
 
   DatabaseClass._init();
@@ -47,7 +45,7 @@ class DatabaseClass {
     for (var scrip in tables) {
       await db.execute(scrip);
     }
-    print(insertScript + ": sqflite script");
+    //print(insertScript + ": sqflite script");
     await db.execute(insertScript);
   }
 

@@ -13,7 +13,7 @@ class TasksDBClass extends DatabaseClass implements DatabaseClassMethods {
   // must have a filter diary id
   Future<List<TaskClass>> getAll(int diaryId) async {
     final db = await instance.database;
-    final dbPath = await getDatabasesPath();
+    //final dbPath = await getDatabasesPath();
     //print(dbPath);
     final List<Map<String, dynamic>> maps = await db.query(
       tableName,
@@ -56,7 +56,6 @@ class TasksDBClass extends DatabaseClass implements DatabaseClassMethods {
   Future<int> insert(dynamic page) async {
     final db = await instance.database;
     //print(page.toMap());
-
     return await db.insert(
       tableName,
       page.toMap(),
@@ -66,12 +65,7 @@ class TasksDBClass extends DatabaseClass implements DatabaseClassMethods {
 
   @override
   Future<int> update(dynamic page) async {
-    //Future<int> updatePage(PageClass page) async {
     final db = await instance.database;
-    //print("Intern update");
-    //print(page.toMap());
-    //print(page.id);
-
     return await db.update(
       tableName,
       page.toMap(),
@@ -84,7 +78,7 @@ class TasksDBClass extends DatabaseClass implements DatabaseClassMethods {
   @override
   Future<int> delete(int id) async {
     final db = await DatabaseClass.instance.database;
-    print(id);
+    //print(id);
     return await db.delete(
       tableName,
       //where: '$dependentArg = ?',

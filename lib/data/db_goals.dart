@@ -2,7 +2,6 @@ import 'package:crud_sqlite_chgpt/data/db.dart';
 import 'package:crud_sqlite_chgpt/data/tables.dart';
 import 'package:crud_sqlite_chgpt/model/goal.dart';
 import 'package:sqflite/sqflite.dart';
-import 'package:path/path.dart';
 
 class GoalsDBClass extends DatabaseClass implements DatabaseClassMethods {
   String tableName = goalTable;
@@ -14,7 +13,7 @@ class GoalsDBClass extends DatabaseClass implements DatabaseClassMethods {
 
   Future<List<GoalClass>> getAll() async {
     final db = await instance.database;
-    final dbPath = await getDatabasesPath();
+    //final dbPath = await getDatabasesPath();
     //print(dbPath);
     final List<Map<String, dynamic>> maps =
         await db.query(tableName, orderBy: "createdAt ASC");
@@ -46,10 +45,8 @@ class GoalsDBClass extends DatabaseClass implements DatabaseClassMethods {
 
   @override
   Future<int> insert(dynamic diary) async {
-    //print(diary.toString());
     final db = await instance.database;
     //print(diary.toMap());
-
     return await db.insert(
       tableName,
       diary.toMap(),
@@ -60,7 +57,6 @@ class GoalsDBClass extends DatabaseClass implements DatabaseClassMethods {
   @override
   Future<int> update(dynamic diary) async {
     final db = await instance.database;
-
     return await db.update(
       tableName,
       diary.toMap(),
