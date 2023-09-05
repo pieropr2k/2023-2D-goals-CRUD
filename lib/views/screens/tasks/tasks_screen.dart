@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:crud_sqlite_chgpt/model/goal.dart';
 import 'package:crud_sqlite_chgpt/model/task.dart';
 import 'package:crud_sqlite_chgpt/view_model/models_providers/task_provider.dart';
@@ -19,8 +18,8 @@ class TasksScreen extends StatelessWidget {
         title: Text("'${goalInfo.title}' Task List:"),
         elevation: 0,
       ),
-      body: Column(
-        children: const [
+      body: const Column(
+        children: [
           ListInfoWidget(
             title: "These are your tasks:",
             content: "These are your tasks to achieve this goal:",
@@ -73,7 +72,7 @@ class TasksScreen extends StatelessWidget {
                 //print(pagesProvider.pages[pagesProvider.pages.length - 1].orderIndex! +1);
                 //print(pagesProvider.pages[pagesProvider.pages.length - 1].orderIndex!);
                 await tasksProvider.addPage(TaskClass(
-                    id: Random().nextInt(1000),
+                    id: DateTime.now().millisecondsSinceEpoch,
                     orderIndex: tasksProvider.tasks.isEmpty
                         ? 0
                         : tasksProvider.tasks[tasksProvider.tasks.length - 1]

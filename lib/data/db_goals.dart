@@ -16,13 +16,15 @@ class GoalsDBClass extends DatabaseClass implements DatabaseClassMethods {
     //final dbPath = await getDatabasesPath();
     //print(dbPath);
     final List<Map<String, dynamic>> maps =
-        await db.query(tableName, orderBy: "createdAt ASC");
+        await db.query(tableName, orderBy: "id ASC");
+    //final List<Map<String, dynamic>> maps = await db.query(tableName, orderBy: "createdAt ASC");
     return List.generate(
       maps.length,
       (index) => GoalClass(
-          id: maps[index]['id'],
-          title: maps[index]['title'],
-          createdAt: maps[index]['createdAt']),
+        id: maps[index]['id'],
+        title: maps[index]['title'],
+        //createdAt: maps[index]['createdAt']
+      ),
     );
   }
 
@@ -36,20 +38,27 @@ class GoalsDBClass extends DatabaseClass implements DatabaseClassMethods {
     );
     if (maps.isNotEmpty) {
       return GoalClass(
-          id: maps[0]['id'],
-          title: maps[0]['title'],
-          createdAt: maps[0]['createdAt']);
+        id: maps[0]['id'],
+        title: maps[0]['title'],
+        //createdAt: maps[0]['createdAt']
+      );
     }
     return null;
   }
 
   @override
-  Future<int> insert(dynamic diary) async {
+  Future<int> insert(dynamic goal) async {
     final db = await instance.database;
     //print(diary.toMap());
+    final goalFormatted = goal as GoalClass;
+    final goalObj = {
+      'id': goalFormatted.id,
+      'title': goalFormatted.title,
+      'createdAt': goalFormatted.createdAt.toIso8601String()
+    };
     return await db.insert(
       tableName,
-      diary.toMap(),
+      goalObj,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }

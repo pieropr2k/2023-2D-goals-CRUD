@@ -1,4 +1,3 @@
-import 'dart:math';
 import 'package:crud_sqlite_chgpt/model/goal.dart';
 import 'package:crud_sqlite_chgpt/view_model/models_providers/goal_provider.dart';
 import 'package:crud_sqlite_chgpt/views/screens/goals/widgets/goal_list.dart';
@@ -28,8 +27,8 @@ class DiariesScreen extends StatelessWidget {
         //bottom: BorderSide(color: Color.fromRGBO(55, 55, 55, 0.75), width: 1)),
       ),
       //backgroundColor: Colors.red,
-      body: Column(
-        children: const [
+      body: const Column(
+        children: [
           ListInfoWidget(
             title: "Personal diary:",
             content:
@@ -68,13 +67,16 @@ class DiariesScreen extends StatelessWidget {
             ),
             TextButton(
               onPressed: () async {
-                //print(taskTitle);
-                //print(DateTime.now().millisecondsSinceEpoch);
+                final timeRightNow = DateTime.now();
+                //print(timeRightNow.microsecondsSinceEpoch);
+                //print(timeRightNow.toIso8601String());
+                // use the dart console
                 await diariesProvider.add(
                   GoalClass(
-                      id: Random().nextInt(1000),
-                      title: diaryTitle,
-                      createdAt: DateTime.now().millisecondsSinceEpoch),
+                    id: timeRightNow.microsecondsSinceEpoch,
+                    title: diaryTitle,
+                    //createdAt: timeRightNow.millisecondsSinceEpoch
+                  ),
                 );
                 Navigator.pop(context);
               },
