@@ -8,7 +8,11 @@ class GoalClass {
     return DateTime.fromMillisecondsSinceEpoch(id);
   }
 
+  GoalClass.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        title = json['title'];
+
   Map<String, dynamic> toMap() {
-    return {'id': id, 'title': title, 'createdAt': createdAt};
+    return {'id': id, 'title': title, 'createdAt': createdAt.toIso8601String()};
   }
 }

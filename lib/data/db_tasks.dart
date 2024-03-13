@@ -22,15 +22,7 @@ class TasksDBClass extends DatabaseClass implements DatabaseClassMethods {
       whereArgs: [diaryId],
     );
     return List.generate(
-      maps.length,
-      (index) => TaskClass(
-        id: maps[index]['id'],
-        orderIndex: maps[index]['orderIndex'],
-        title: maps[index]['title'],
-        content: maps[index]['content'],
-        diaryId: maps[index]['diaryId'],
-      ),
-    );
+        maps.length, (index) => TaskClass.fromJson(maps[index]));
   }
 
   @override
@@ -42,12 +34,7 @@ class TasksDBClass extends DatabaseClass implements DatabaseClassMethods {
       whereArgs: [id],
     );
     if (maps.isNotEmpty) {
-      return TaskClass(
-        id: maps[0]['id'],
-        title: maps[0]['title'],
-        content: maps[0]['content'],
-        diaryId: maps[0]['diaryId'],
-      );
+      return TaskClass.fromJson(maps[0]);
     }
     return null;
   }

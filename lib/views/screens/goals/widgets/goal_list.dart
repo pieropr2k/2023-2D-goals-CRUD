@@ -13,30 +13,28 @@ class GoalList extends StatelessWidget {
         //diaryProvider.loadDiaries();
         final diaries = goalProvider.goals;
         if (diaries.isEmpty) {
-          return Expanded(
-            child: Container(
-              width: double.infinity,
-              //height: 500,
-              //color: Colors.amber,
-              alignment: Alignment.center,
-              child: SizedBox(
-                //alignment: Alignment.center,
-                //width: 200,
-                height: 150,
-                //color: Colors.red,
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: const [
-                    Icon(
-                      Icons.fitness_center_sharp,
-                      size: 50,
-                    ),
-                    SizedBox(height: 9),
-                    Text('No goals found...'),
-                    SizedBox(height: 3),
-                    Text('Start adding ones.'),
-                  ],
-                ),
+          return Container(
+            width: double.infinity,
+            //height: 500,
+            //color: Colors.amber,
+            alignment: Alignment.center,
+            child: const SizedBox(
+              //alignment: Alignment.center,
+              //width: 200,
+              height: 150,
+              //color: Colors.red,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.fitness_center_sharp,
+                    size: 50,
+                  ),
+                  SizedBox(height: 9),
+                  Text('No goals found...'),
+                  SizedBox(height: 3),
+                  Text('Start adding ones.'),
+                ],
               ),
             ),
           );

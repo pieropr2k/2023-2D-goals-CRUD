@@ -12,6 +12,13 @@ class TaskClass {
       required this.content,
       required this.diaryId});
 
+  TaskClass.fromJson(Map<String, dynamic> json)
+      : id = json['id'],
+        orderIndex = json['orderIndex'],
+        title = json['title'],
+        content = json['content'],
+        diaryId = json['diaryId'];
+
   Map<String, dynamic> toMap() {
     return {
       'id': id,

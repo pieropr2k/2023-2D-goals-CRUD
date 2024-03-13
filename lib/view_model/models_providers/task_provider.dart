@@ -12,19 +12,19 @@ class TasksProvider with ChangeNotifier {
     notifyListeners();
   }
 
-  Future<void> addPage(TaskClass page) async {
+  Future<void> add(TaskClass page) async {
     _tasks = [..._tasks, page];
     await TasksDBClass.instance.insert(page);
     notifyListeners();
     //await loadPages(diaryId);
   }
 
-  Future<void> updatePage(TaskClass page) async {
+  Future<void> update(TaskClass page) async {
     await TasksDBClass.instance.update(page);
     await loadAllData(diaryId);
   }
 
-  Future<void> deletePage(int id) async {
+  Future<void> delete(int id) async {
     _tasks = _tasks.where((page) => page.id != id).toList();
     //.filter(id => _pages.id);
     await TasksDBClass.instance.delete(id);
@@ -38,17 +38,23 @@ class TasksProvider with ChangeNotifier {
     if (oldIndex < newIndex) {
       newIndex -= 1;
     }
+    List<int> orderIndexList = [];
+
+    for (int i = 0; i < _tasks.length; i++) {
+      orderIndexList.insert(i, _tasks[i].orderIndex!);
+    }
+    //print(orderIndexList);
 
     // get the tile we are moving
     TaskClass pageToReplace = _tasks.removeAt(oldIndex);
     _tasks.insert(newIndex, pageToReplace);
 
     for (int i = 0; i < _tasks.length; i++) {
-      _tasks[i].orderIndex = i;
+      _tasks[i].orderIndex = orderIndexList[i];
+      //_tasks[i].orderIndex = i;
     }
-
     // You must know about async await
-    for (final task in _tasks) {
+    for (TaskClass task in _tasks) {
       await TasksDBClass.instance.update(task);
     }
     notifyListeners();

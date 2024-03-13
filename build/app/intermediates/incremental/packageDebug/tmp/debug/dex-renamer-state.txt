@@ -1,0 +1,4 @@
+#Fri Sep 15 13:07:25 PET 2023
+base.0=C\:\\Users\\USER\\Documents\\MobileProjects\\Flutter\\crud_sqlite_chgpt\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex

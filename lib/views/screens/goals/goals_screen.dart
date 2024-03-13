@@ -12,30 +12,21 @@ class DiariesScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text(
-          'My 2023 goals',
-          style: TextStyle(fontWeight: FontWeight.bold
-              //color: Colors.deepPurpleAccent
-              ), //<-- SEE HERE
-        ),
-        backgroundColor: Color.fromARGB(255, 2, 189, 252),
-        //toolbarHeight: 50, // default is 56
+        title: const Text("My 2023 goals"),
         elevation: 0,
-        shape: const Border(
-            bottom:
-                BorderSide(color: Color.fromRGBO(244, 10, 158, 1), width: 2.5)),
-        //bottom: BorderSide(color: Color.fromRGBO(55, 55, 55, 0.75), width: 1)),
       ),
       //backgroundColor: Colors.red,
       body: const Column(
         children: [
+          ///*
           ListInfoWidget(
             title: "Personal diary:",
             content:
                 "These are your personal goals you must achieve this year to annotate:",
             subtitle: "GOALS",
           ),
-          GoalList()
+          //*/
+          Expanded(child: GoalList())
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -49,8 +40,7 @@ class DiariesScreen extends StatelessWidget {
     showDialog(
       context: context,
       builder: (context) {
-        final diariesProvider =
-            Provider.of<GoalProvider>(context, listen: false);
+        final goalsProvider = Provider.of<GoalProvider>(context, listen: false);
         String diaryTitle = "";
         return AlertDialog(
           title: const Text('Add Diary'),
@@ -71,9 +61,9 @@ class DiariesScreen extends StatelessWidget {
                 //print(timeRightNow.microsecondsSinceEpoch);
                 //print(timeRightNow.toIso8601String());
                 // use the dart console
-                await diariesProvider.add(
+                await goalsProvider.add(
                   GoalClass(
-                    id: timeRightNow.microsecondsSinceEpoch,
+                    id: timeRightNow.millisecondsSinceEpoch,
                     title: diaryTitle,
                     //createdAt: timeRightNow.millisecondsSinceEpoch
                   ),

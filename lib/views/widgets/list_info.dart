@@ -25,6 +25,7 @@ class ListInfoWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
+              /*
               Text(
                 title,
                 style: const TextStyle(
@@ -33,6 +34,17 @@ class ListInfoWidget extends StatelessWidget {
                   fontWeight: FontWeight.bold,
                 ),
               ),
+              */
+              Expanded(
+                child: Text(
+                  title,
+                  style: const TextStyle(
+                    color: Colors.black,
+                    fontSize: 20,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              )
             ],
           ),
         ),
@@ -65,10 +77,11 @@ class ListInfoWidget extends StatelessWidget {
           child: Row(
             mainAxisAlignment: MainAxisAlignment.start,
             children: [
-              Text(
+              Expanded(
+                  child: Text(
                 subtitle,
                 style: const TextStyle(color: Color(0xffAFB6C8)),
-              )
+              ))
             ],
           ),
         ),

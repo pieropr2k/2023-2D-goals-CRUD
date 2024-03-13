@@ -25,7 +25,8 @@ class TasksScreen extends StatelessWidget {
             content: "These are your tasks to achieve this goal:",
             subtitle: "TASKS",
           ),
-          TaskList()
+          //TaskList()
+          Expanded(child: TaskList())
         ],
       ),
       floatingActionButton: FloatingActionButton(
@@ -71,13 +72,16 @@ class TasksScreen extends StatelessWidget {
                 //print(pagesProvider.pages[pagesProvider.pages.length - 1]);
                 //print(pagesProvider.pages[pagesProvider.pages.length - 1].orderIndex! +1);
                 //print(pagesProvider.pages[pagesProvider.pages.length - 1].orderIndex!);
-                await tasksProvider.addPage(TaskClass(
+                await tasksProvider.add(TaskClass(
                     id: DateTime.now().millisecondsSinceEpoch,
+                    orderIndex: DateTime.now().millisecondsSinceEpoch,
+                    /*
                     orderIndex: tasksProvider.tasks.isEmpty
                         ? 0
                         : tasksProvider.tasks[tasksProvider.tasks.length - 1]
                                 .orderIndex! +
                             1,
+                    */
                     title: pageTitle,
                     content: pageContent,
                     diaryId: diaryId));

@@ -16,8 +16,11 @@ class GoalProvider with ChangeNotifier {
   }
 
   Future<void> add(GoalClass diary) async {
+    //_goals = [..._goals, diary];
     _goals = [..._goals, diary];
-    await GoalsDBClass.instance.insert(diary);
+    int id = await GoalsDBClass.instance.insert(diary);
+    //_goals = [..._goals, diary];
+    print(id);
     //await loadDiaries();
     notifyListeners();
   }

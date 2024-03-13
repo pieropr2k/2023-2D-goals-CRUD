@@ -18,14 +18,9 @@ class GoalsDBClass extends DatabaseClass implements DatabaseClassMethods {
     final List<Map<String, dynamic>> maps =
         await db.query(tableName, orderBy: "id ASC");
     //final List<Map<String, dynamic>> maps = await db.query(tableName, orderBy: "createdAt ASC");
+    print(maps);
     return List.generate(
-      maps.length,
-      (index) => GoalClass(
-        id: maps[index]['id'],
-        title: maps[index]['title'],
-        //createdAt: maps[index]['createdAt']
-      ),
-    );
+        maps.length, (index) => GoalClass.fromJson(maps[index]));
   }
 
   @override
@@ -37,11 +32,7 @@ class GoalsDBClass extends DatabaseClass implements DatabaseClassMethods {
       whereArgs: [id],
     );
     if (maps.isNotEmpty) {
-      return GoalClass(
-        id: maps[0]['id'],
-        title: maps[0]['title'],
-        //createdAt: maps[0]['createdAt']
-      );
+      return GoalClass.fromJson(maps[0]);
     }
     return null;
   }
@@ -49,16 +40,13 @@ class GoalsDBClass extends DatabaseClass implements DatabaseClassMethods {
   @override
   Future<int> insert(dynamic goal) async {
     final db = await instance.database;
-    //print(diary.toMap());
-    final goalFormatted = goal as GoalClass;
-    final goalObj = {
-      'id': goalFormatted.id,
-      'title': goalFormatted.title,
-      'createdAt': goalFormatted.createdAt.toIso8601String()
-    };
+    print(goal.toMap());
+    //final goalFormatted = goal as GoalClass;
+    print(goal.createdAt.toIso8601String());
     return await db.insert(
       tableName,
-      goalObj,
+      goal.toMap(),
+      //goalObj,
       conflictAlgorithm: ConflictAlgorithm.replace,
     );
   }

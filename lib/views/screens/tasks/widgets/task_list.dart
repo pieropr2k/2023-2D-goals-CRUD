@@ -17,7 +17,31 @@ class TaskList extends StatelessWidget {
         tasksProvider.diaryId = goalInfoId;
         final tasks = tasksProvider.tasks;
         if (tasks.isEmpty) {
-          return Expanded(
+          return Container(
+            //width: double.infinity,
+            //height: 500,
+            //color: Colors.amber,
+            alignment: Alignment.center,
+            child: const SizedBox(
+              height: 150,
+              //color: Colors.red,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Icon(
+                    Icons.fitness_center_sharp,
+                    size: 50,
+                  ),
+                  SizedBox(height: 9),
+                  Text('No goals found...'),
+                  SizedBox(height: 3),
+                  Text('Start adding ones.'),
+                ],
+              ),
+            ),
+          );
+          /*
+          Expanded(
             child: Container(
               //width: double.infinity,
               //height: 500,
@@ -42,6 +66,7 @@ class TaskList extends StatelessWidget {
               ),
             ),
           );
+          */
         }
         return ReorderableListView.builder(
           itemCount: tasks.length,
@@ -50,13 +75,10 @@ class TaskList extends StatelessWidget {
           itemBuilder: (context, index) {
             final task = tasks[index];
             return Dismissible(
-                //key: GlobalKey(page.toMap()),
                 //key: UniqueKey(),
                 key: Key(task.id.toString()),
-                //onDismissed: (direction) {
                 onDismissed: (direction) async {
-                  //await pagesProvider.deletePage(page.id);
-                  await tasksProvider.deletePage(task.id);
+                  await tasksProvider.delete(task.id);
                 },
                 background: Container(
                   color: Colors.red,
@@ -67,8 +89,6 @@ class TaskList extends StatelessWidget {
                 child: Column(
                   children: [
                     ListTile(
-                      //key: ValueKey(page),
-                      //Key(page.toString()),
                       title: Text(task.title),
                       subtitle: Text(task.content),
                     ),
